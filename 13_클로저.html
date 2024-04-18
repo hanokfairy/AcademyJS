@@ -11,21 +11,80 @@
 	- 클로저는 주로 콜백함수와 같이 쓰인다.(비동기적인 코드에서 쓰임)
 	
 	<script type="text/javascript">
-		
+		function exFn() {
+			let x = 0;
+			// exFn2();
+			return function () {
+				console.log(x);
+			}
+		}
+		const exFn2 = exFn();
+		exFn2();
+		// console.log(x);
+
+		function fn(){
+			// 객체를 생성할 수 있는 생성자를 가지고 있다. constructor
+			// this.name = '홍길동';
+		};
+		const obj = new fn();
+		console.log(typeof obj);
+
 	</script>
 	
 	<h2>클로저 사용 예</h2>
 	<script type="text/javascript">
-	
-		
+		// 클로저를 활용한 캡슐화 구현
+		const Student = (function() {
+			let pw = '123';
+			function Student() {
+				this.name = '오민호';
+			}
+			Student.prototype.getPw = function() {
+				return pw;
+			}
+			Student.prototype.setPw = function(strPw) {
+				pw = strPw;
+			}
+
+			return Student;
+		})();
+		console.log(Student());
+		const studentObj = new Student();
+		console.log(studentObj);
+		console.log(studentObj.getPw());
+		studentObj.setPw(1234);
+		console.log(studentObj.getPw());
 	</script>
 	
 	<h1>클로저 예시</h1>
-	- 버튼을 클릭시 카운터 증가
-	<button type="button" id="ctnBtn">클릭</button>
-	<h4 id="result"></h4>
+	- 버튼을 클릭시 카운터 증가<br>
+	<button type="button" id="cntBtn">클릭</button>
+	클릭횟수 : <label id = "cntLabel">0</label>
 	<script>
+		const $cntBtn = document.getElementById('cntBtn');
+		const $cntLabel = document.getElementById('cntLabel');
 		
+		const cnt = (cnt => () => ++cnt)(0);
+		$cntBtn.addEventListener('click', function(){
+			$cntLabel.textContent = cnt();
+		})
+		const test = () => () => () => () => console.log('함수호출');
+		test()()()();
+		/*
+		for(var i = 1; i <= 10; i++){
+			(function(j){
+				setTimeout(function(){
+					console.log(j);
+				},200*j);
+			})(i);
+		}
+		*/
+		for(let i = 1; i <= 10; i++){
+			setTimeout(function(){
+				console.log(i);
+			},200*i);
+		}
+		// console.log(i);
 	</script>
 </body>
 </html>
