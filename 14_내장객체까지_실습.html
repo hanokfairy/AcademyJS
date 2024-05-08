@@ -1,130 +1,361 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>내장객체 실습</title>
-<link rel="shortcut icon" href="#" type="image/x-icon">
-</head>
-<body>
-	<h1>내장객체 - 날짜객체 실습</h1>
-	<h2>실습1</h2>
-	실습. 아래에 선언된 날짜 객체에서 이틀 후의 날짜 정보로 변경하여 결괏값을
-	 출력하시오.
-	2024-04-18 
+  <head>
+    <meta charset="UTF-8" />
+    <title>내장객체 실습</title>
+    <link rel="shortcut icon" href="#" type="image/x-icon" />
+  </head>
+  <body>
+    <h1>내장객체 - 날짜객체 실습</h1>
+    <h2>실습1</h2>
+    실습. 아래에 선언된 날짜 객체에서 이틀 후의 날짜 정보로 변경하여 결괏값을
+    출력하시오. 2024-04-18
     <!-- 출력: 2024년 04월 20일 (토) -->
-	<script type="text/javascript">
-		
+    <script type="text/javascript">
+      const targetDate = new Date("2024-04-18");
+      console.log(targetDate);
+      targetDate.setDate(targetDate.getDate() + 2);
+      const exYear = targetDate.getFullYear();
+      const exMonth = targetDate.getMonth() + 1;
+      const exDate = targetDate.getDate();
+      const exDay = targetDate.getDay();
+      const dayArr = ["일", "월", "화", "수", "목", "금", "토"];
+      console.log(`${exYear}년 ${exMonth}월 ${exDate}일 (${dayArr[exDay]})`);
+    </script>
 
-		const targetDate = new Date('2024-04-18');
-		
+    <h2>실습2</h2>
+    실습. 오늘 날짜에서 2024-04-01 날의 차이를 계산하도록 하시오.
+    <!-- 입력하신 날짜는 20일 이후 날짜입니다. -->
+    <!-- 입력하신 날짜는 20일 이전 날짜입니다. -->
+    <script type="text/javascript">
+      const currentDay = new Date();
+      const targetDate2 = new Date("2024-05-08");
+      const diff = (currentDay - targetDate2) / 1000 / 60 / 60 / 24;
+      let result = Math.round(diff);
+      if (result > 0) {
+        console.log(`입력하신 날짜는 ${result}일 이전 날짜입니다.`);
+      } else if (result < 0) {
+        console.log(`입력하신 날짜는 ${-result}일 이후 날짜입니다.`);
+      } else {
+        console.log(`입력하신 날짜는 오늘입니다.`);
+      }
+    </script>
 
-	</script>
-	
-	<h2>실습2</h2>
-	실습. 오늘 날짜에서 2024-04-01 날의 차이를 계산하도록 하시오.
-	<!-- 입력하신 날짜는 20일 이후 날짜입니다. -->
-	<!-- 입력하신 날짜는 20일 이전 날짜입니다. -->
-	<script type="text/javascript">
-		const currentDay = new Date();
-		const targetDate2 = new Date('2024-04-01');
-		
-	</script>
-	
-	<h2>실습3</h2>
-	실습. 아래의 배열에 날짜정보가 담겨있다 오늘 날짜 보다 큰 날짜 객체의 
-	정보는 몇개인지 출력하시오.
-	<script type="text/javascript">
-		const dateArray = [
-			new Date('2022-06-21'),
-			new Date('2024-04-25'),
-			new Date('2022-11-25'),
-			new Date('2021-12-21'),
-			new Date('2024-07-22')
-		];
-		
-		
+    <h2>실습3</h2>
+    실습. 아래의 배열에 날짜정보가 담겨있다 오늘 날짜 보다 큰 날짜 객체의 정보는
+    몇개인지 출력하시오.
+    <script type="text/javascript">
+      const dateArray = [
+        new Date("2022-06-21"),
+        new Date("2024-08-25"),
+        new Date("2022-11-25"),
+        new Date("2021-12-21"),
+        new Date("2024-07-22"),
+      ];
 
-	</script>
-	<h1>문자열 객체 실습</h1>
-	<h2>실습4</h2>
-	실습. 아래의 회원 중 덕진동에 사는 회원의 이름을 출력하시오.
-	<script type="text/javascript">
-		const userArray = [
-			{userName : '홍길동', userAddr : '전주시 덕진동 227'},
-			{userName : '고길동', userAddr : '전주시 서노송동 88'},
-			{userName : '유관순', userAddr : '전주시 덕진동 1길 774'},
-			{userName : '이순신', userAddr : '전주시 반월동 3길 55'}
-		]
-		
-	</script>
-	
-	<h2>실습5</h2>
-	실습. 아래의 메일 주소가 담긴 배열이 있다. 메일 주소의 문자열을 활용하여 사이트의 명을
-	찾아 출력하도록 하시오.
-	(abc@naver.com -> naver)
-	<script type="text/javascript">
-		const mailArray = [
-			'abc123@naver.com',
-			'abc456@daum.net',
-			'ksmart@gmail.com',
-			'ksmart123@hot.co.kr'
-		]
+      const dateFilter = dateArray.filter((date) => date > currentDay);
+      print = `오늘 날짜 보다 큰 날짜의 갯수 : ${dateFilter.length}`;
+      console.log(print);
 
-		
-		
-		
-	</script>
-	
-	<h2>실습6</h2>
-	실습. 아래의 url과 결괏물을 확인하고 최종 결괏물이 나올 수 있도록 코드를 완성하시오.
-	<script type="text/javascript">
-		let myUrl = 'http://localhost:8080/user/userList?userCode=00001&userNum=10';
+      // const bigDate = [];
 
-		
-		// 출력물
-		// {userCode : 00001, userNum : 10}
-		console.log(userInfo);
-		// 출력물
-		// [{userCode : 00001}, {userNum : 10}]
-		
-		console.log(resultArr);
+      // for (let dayElement of dateArray) {
+      //   if (dayElement > currentDay) {
+      //     bigDate.push(dayElement);
+      //   }
+      // }
+      // console.log(bigDate.length);
+    </script>
+    <h1>문자열 객체 실습</h1>
+    <h2>실습4</h2>
+    실습. 아래의 회원 중 덕진동에 사는 회원의 이름을 출력하시오.
+    <script type="text/javascript">
+      const userArray = [
+        { userName: "홍길동", userAddr: "전주시 덕진동 227" },
+        { userName: "고길동", userAddr: "전주시 서노송동 88" },
+        { userName: "유관순", userAddr: "전주시 덕진동 1길 774" },
+        { userName: "이순신", userAddr: "전주시 반월동 3길 55" },
+      ];
 
-	</script>
-	
+      print = userArray
+        .filter((userInfo) => userInfo.userAddr.includes("덕진동"))
+        .map((userInfo) => userInfo.userName)
+        .sort()
+        .join(", ");
+      console.log(print);
+
+      // for (i = 0; i < userArray.length; i++) {
+      //   if (userArray[i].userAddr.indexOf("덕진동") > -1) {
+      //     console.log(userArray[i].userName);
+      //   }
+      // }
+    </script>
+
+    <h2>실습5</h2>
+    실습. 아래의 메일 주소가 담긴 배열이 있다. 메일 주소의 문자열을 활용하여
+    사이트의 명을 찾아 출력하도록 하시오. (abc@naver.com -> naver)
+    <script type="text/javascript">
+      const mailArray = [
+        "abc123@naver.com",
+        "abc456@daum.net",
+        "ksmart@gmail.com",
+        "ksmart123@hot.co.kr",
+      ];
+
+      // for (let element of mailArray) {
+      //   let split1 = element.split("@");
+      //   let sResult5 = split1[1].split(".");
+      //   let result5 = sResult5[0];
+      //   console.log(result5);
+      // }
+      const siteNameFn = (email) => {
+        return email.substring(email.indexOf("@") + 1, email.indexOf("."));
+      };
+      print = mailArray.map((email) => siteNameFn(email)).join(", ");
+      console.log(print);
+    </script>
+
+    <h2>실습6</h2>
+    실습. 아래의 url과 결괏물을 확인하고 최종 결괏물이 나올 수 있도록 코드를
+    완성하시오.
+    <script type="text/javascript">
+      let myUrl =
+        "http://localhost:8080/user/userList?userCode=00001&userNum=10";
+
+      // 출력물
+      // {userCode : 00001, userNum : 10}
+      // const url = new URL(myUrl);
+      // const searchParams = new URLSearchParams(url.search);
+      // const userInfo = {};
+      // for (const [key, value] of searchParams.entries()) {
+      //   userInfo[key] = value;
+      // }
+      let queryParam = myUrl.substring(myUrl.indexOf("?") + 1);
+      console.log(queryParam);
+      const userInfo = {};
+      queryParam.split("&").reduce((acc, cur) => {
+        const param = cur.split("=");
+        acc[param[0]] = param[1];
+        return acc;
+      }, userInfo);
+
+      console.log(userInfo);
+      const urlObj = new URL(myUrl);
+      const keyArr = [...urlObj.searchParams.keys()];
+      keyArr.forEach((item) => {
+        const value = urlObj.searchParams.get(item);
+        console.log(`parameterKey: ${item}, parameterValue: ${value}`);
+      });
+      console.log(keyArr);
+
+      // 출력물
+      // [{userCode : 00001}, {userNum : 10}]
+      // resultArr = queryParam.split("&").map((param) => {
+      //   const obj = {};
+      //   const parseParam = param.split("=");
+      //   obj[parseParam[0]] = parseParam[1];
+      //   return obj;
+      // });
+      const resultArr = [];
+      queryParam.split("&").reduce((acc, cur) => {
+        const obj = {};
+        const parseParam = cur.split("=");
+        obj[parseParam[0]] = parseParam[1];
+        acc.push(obj);
+        return acc;
+      }, resultArr);
+      console.log(resultArr);
+    </script>
+
     <h2>실습7</h2>
-    실습. data 포털에서 단기예보를 요청하여 
-        다음과 같이 JSON포맷 데이터를 응답받았다.
-        오늘 날짜에 일치하는 하늘상태, 습도, 온도를 객체에 담아 반환하시오.
+    실습. data 포털에서 단기예보를 요청하여 다음과 같이 JSON포맷 데이터를
+    응답받았다. 오늘 날짜에 일치하는 하늘상태, 습도, 온도를 객체에 담아
+    반환하시오.
     <script>
-        // 반환예시 : {'하늘상태':'맑음', '습도':'75%', '온도':'15℃'}
-        /**
-         * category: SKY(하늘상태), TMP(온도), REH(습도)
-         * SKY VALUE 예시
-         *   1 : 맑음
-         *   3 : 구름많음
-         *   4 : 흐림
-         */ 
-        const response = [
-                        {"baseDate":"20231117","baseTime":"1400","category":"SKY","fcstDate":"20231122","fcstTime":"1900","fcstValue":"4","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"PTY","fcstDate":"20231122","fcstTime":"1900","fcstValue":"2","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"POP","fcstDate":"20231122","fcstTime":"1900","fcstValue":"60","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"WAV","fcstDate":"20231122","fcstTime":"1900","fcstValue":"0","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"PCP","fcstDate":"20231122","fcstTime":"1900","fcstValue":"강수없음","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"TMP","fcstDate":"20231122","fcstTime":"1900","fcstValue":"10","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"REH","fcstDate":"20231122","fcstTime":"1900","fcstValue":"75","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"SKY","fcstDate":"20231123","fcstTime":"1900","fcstValue":"4","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"PTY","fcstDate":"20231123","fcstTime":"1900","fcstValue":"2","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"POP","fcstDate":"20231123","fcstTime":"1900","fcstValue":"60","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"WAV","fcstDate":"20231123","fcstTime":"1900","fcstValue":"0","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"PCP","fcstDate":"20231123","fcstTime":"1900","fcstValue":"강수없음","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"TMP","fcstDate":"20231122","fcstTime":"1900","fcstValue":"15","nx":63,"ny":89},
-                        {"baseDate":"20231117","baseTime":"1400","category":"REH","fcstDate":"20231123","fcstTime":"1900","fcstValue":"75","nx":63,"ny":89}
-                        ];
+      // 반환예시 : {'하늘상태':'맑음', '습도':'75%', '온도':'15℃'}
+      /**
+       * category: SKY(하늘상태), TMP(온도), REH(습도)
+       * SKY VALUE 예시
+       *   1 : 맑음
+       *   3 : 구름많음
+       *   4 : 흐림
+       */
 
-    </script>  
-	
+      const response = [
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "SKY",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "4",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "PTY",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "2",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "POP",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "60",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "WAV",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "0",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "PCP",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "강수없음",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "TMP",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "10",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "REH",
+          fcstDate: "20231122",
+          fcstTime: "1900",
+          fcstValue: "75",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "SKY",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "4",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "PTY",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "2",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "POP",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "60",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "WAV",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "0",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "PCP",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "강수없음",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "TMP",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "15",
+          nx: 63,
+          ny: 89,
+        },
+        {
+          baseDate: "20231117",
+          baseTime: "1400",
+          category: "REH",
+          fcstDate: "20231123",
+          fcstTime: "1900",
+          fcstValue: "75",
+          nx: 63,
+          ny: 89,
+        },
+      ];
 
-	
+      const parseFcst = {};
+      response.reduce((acc, cur) => {
+        if (cur.fcstDate == "20231123") {
+          const cate = cur.category;
+          let value = cur.fcstValue;
+          switch (cate) {
+            case "SKY":
+              if (value == 1) {
+                acc["하늘상태"] = `맑음`;
+              } else if (value == 3) {
+                acc[`하늘상태`] = "구름많음";
+              } else {
+                acc["하늘상태"] = "흐림";
+              }
+              break;
+            case "TMP":
+              acc["온도"] = `${value}℃`;
+              break;
+            case "REH":
+              acc["습도"] = `${value}%`;
+              break;
+          }
+        }
+        return acc;
+      }, parseFcst);
+      console.log(parseFcst);
 
-</body>
+      // response.map((r) => {
+      //   if (r.fcstDate == "20231123") {
+      //     console.log(r);
+      //   }
+      // });
+    </script>
+  </body>
 </html>
