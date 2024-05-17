@@ -64,7 +64,14 @@
       <li>ksmart302</li>
       <li>ksmart교직원실</li>
     </ul>
-    <script></script>
+    <script>
+      const $allTag = document.getElementsByTagName("*");
+      console.log($allTag.length);
+      const $inputTag = document.getElementsByTagName("input");
+      console.log($inputTag[0]);
+      const $imgTag = document.getElementsByTagName("img");
+      console.log($imgTag, "HTMLCollection 빈 배열 반환");
+    </script>
 
     <h2>class를 이용한 요소노드 취득</h2>
     - document.getElementsByClassName(클래스이름);<br />
@@ -79,14 +86,22 @@
     <script>
       const $ksmart = document.getElementsByClassName("ksmart");
       console.log({ $ksmart });
+
+      // for 문으로 class 명 변경 시 두번재 있는 li는 class명이 변경되지 않는 이슈 발생
       // for (let i = 0; i < $ksmart.length; i++) {
       //   $ksmart[i].className = "ksmart51";
       //   console.log($ksmart[i]);
       // }
       // console.log([...$ksmart]);
-      [...$ksmart].forEach((item) => {
-        item.className = "ksmart51";
-      });
+
+      // 1. while 문을 통해 이슈 해결
+      // let idx = 0;
+      // while ($ksmart.length > 0) {
+      //   $ksmart[idx].className = "ksmart51";
+      // }
+
+      // 2. 배열로 변환하여 이슈 해결 -> 추천
+      // [...$ksmart].forEach((item) => (item.className = "ksmart51"));
     </script>
 
     <h2>CSS 선택자를 이용한 요소노드 취득</h2>
@@ -128,7 +143,11 @@
       const $ks301 = document.querySelector(".ksmart301");
       console.log($ks301);
       const $ks304 = document.querySelector(".ksmart304");
-      console.log($ks304);
+      console.log($ks304, "찾으려는 요소가 없을 시 null 반환");
+
+      // css 선택자 문법에 맞지 않으면 에러 발생
+      // const $inputEle = document.querySelector("input[]");
+      // console.log($inputEle);
     </script>
     <h3>querySelectorAll</h3>
     - document.querySelectorAll(css선택자);<br />
@@ -140,7 +159,13 @@
       <li class="ksmart-course">ksIT과정</li>
       <li class="ksmart-course">ksmartIT과정</li>
     </ul>
-    <script></script>
+    <script>
+      const $ksCourse = document.querySelectorAll(".ksmart-course");
+      console.log($ksCourse);
+      $ksCourse.forEach((element) => console.log(element.textContent));
+      // 유사배열이므로 배열로 변환하여 사용
+      console.log([...$ksCourse]);
+    </script>
 
     <h2>특정 요소노드 취득 여부 확인</h2>
     <h3>matches</h3>
@@ -148,10 +173,16 @@
     - 선택한 요소가 다른 css 선택자문법의 요소로 취득할 수 있는지 확인<br />
     - li.ksmart50 == li[class="ksmart50"]
     <ul id="ksmart">
-      <li class="ksmart50">50기</li>
-      <li class="ksmart51">51기</li>
-      <li class="ksmart52">52기</li>
+      <li class="ks50">50기</li>
+      <li class="ks51">51기</li>
+      <li class="ks52">52기</li>
     </ul>
-    <script></script>
+    <script>
+      const $ks51 = document.querySelector(".ks51");
+      let isGet = $ks51.matches("li.ks51");
+      console.log(isGet);
+      isGet = $ks51.matches("div>li.ks50");
+      console.log(isGet);
+    </script>
   </body>
 </html>

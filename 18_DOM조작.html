@@ -1,125 +1,213 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="data:,">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:," />
     <title>DOM 조작</title>
-</head>
-<br>
-    <h1>DOM 조작</h1>
-    - 새로운 노드를 생성하여 DOM에 추가하거나 기존 노드를 삭제 또는 교체하는 것
-    
-    <h2>innerHTML</h2>
-    - setter와 getter 모두 존재하는 접근자 프로퍼티(속성)<br>
-    - HTML 마크업 수정 및 반환 가능<br><br>
-    
-    <div id="ksmart">
-        한국스마트정보교육원<span>개발자 51기</span>
+  </head>
+  <br />
+  <h1>실습</h1>
+  <form action="#">
+    <input type="text" name="memberName" id="memberName" value="고윤영" />
+    <button type="button" id="formBtn">입력확인</button>
+    <button type="reset">초기화</button>
+  </form>
+
+  <script>
+    const $formBtn = document.getElementById("formBtn");
+    $formBtn.onclick = function () {
+      const $memberName = document.getElementById("memberName");
+      const attributeValue = $memberName.attributes.value.value;
+      const propertieValue = $memberName.value;
+      console.log(attributeValue, "<-- 태그의 value 기본값");
+      console.log(propertieValue, "<-- 현재 태그에 입력한 value 값");
+    };
+  </script>
+
+  <h1>DOM 조작</h1>
+  - 새로운 노드를 생성하여 DOM에 추가하거나 기존 노드를 삭제 또는 교체하는 것
+
+  <h2>innerHTML</h2>
+  - setter와 getter 모두 존재하는 접근자 프로퍼티(속성)<br />
+  - HTML 마크업 수정 및 반환 가능<br /><br />
+
+  <div id="ksmart">한국스마트정보교육원<span>개발자 51기</span></div>
+
+  <!-- 실습 -->
+  <!-- li 태그 -->
+  <!-- • 강의실 301호 -->
+  <!-- • 강의실 302호 -->
+  <!-- • 교직원실 -->
+  <!-- • 행정실 -->
+  <!-- • 상담실 -->
+  <div id="exDiv"></div>
+
+  <script>
+    const $exDiv = document.getElementById("exDiv");
+    console.log({ $exDiv });
+    console.log($exDiv.innerHTML);
+    let html = `실습`;
+    html += `<ul>
+                  <li>강의실 301호</li>
+                  <li>강의실 302호</li>
+                  <li>교직원실</li>
+                  <li>행정실</li>
+                  <li>상담실</li>
+                  </ul>`;
+    $exDiv.innerHTML += html;
+
+    const $ksmart = document.getElementById("ksmart");
+    console.log({ $ksmart });
+    console.log($ksmart.innerHTML);
+    html = `한국스마트정보교육원 <button type = "button">51기</button>`;
+    $ksmart.innerHTML += html;
+  </script>
+
+  <h2>textContent</h2>
+  - setter와 getter 모두 존재하는 접근 프로퍼티(속성)<br />
+  - 요소노드의 모든 텍스트(자손노드 포함)를 반환
+  <br />
+  - 단, HTML 마크업은 무시
+  <div id="ks51">
+    <div id="team">
+      <ul>
+        <li>1팀</li>
+        <li>2팀</li>
+        <li>3팀</li>
+      </ul>
     </div>
+  </div>
+  <script>
+    const $ks51 = document.getElementById("ks51");
+    console.log($ks51.textContent); // 내용을 가져올 때도 마크업 무시
+    $ks51.textContent = html; // 할당 시 마크업 무시
+  </script>
 
-    <div id="exDiv"></div>
-    
-    <script>
-       
-    </script>
+  <h2>nodeValue</h2>
+  - setter와 getter 모두 존재하는 접근자 프로퍼티(속성)<br />
+  - 텍스트노드의 프로퍼티(vs textContent는 요소노드의 모든 텍스트)<br />
+  - 즉, 텍스트노드 이외의 노드에서는 null를 반환
 
-    <h2>textContent</h2>
-    - setter와 getter 모두 존재하는 접근 프로퍼티(속성)<br>
-    - 요소노드의 모든 텍스트(자손노드 포함)를 반환 <br>
-    - 단, HTML 마크업은 무시
-    <div id="ks51">
-        <div id="team">
-            <ul>
-                <li>1팀</li>
-                <li>2팀</li>
-                <li>3팀</li>
-            </ul>
-        </div>
-    </div>
-    <script>
-        
-    </script>
-    
-    <h2>nodeValue</h2>
-    - setter와 getter 모두 존재하는 접근자 프로퍼티(속성)<br>
-    - 텍스트노드의 프로퍼티(vs textContent는 요소노드의 모든 텍스트)<br>
-    - 즉, 텍스트노드 이외의 노드에서는 null를 반환
-    
-    <div>
-        <span id="sText">경력자같은 신입 개발자</span>
-    </div>
+  <div>
+    <span id="sText">경력자같은 신입 개발자</span>
+  </div>
 
-    <script>
+  <script>
+    const $sText = document.getElementById("sText");
+    console.log($sText.textContent);
+    console.log($sText.firstChild.nodeValue);
+    $sText.firstChild.nodeValue += " 51기";
+  </script>
 
-    </script>
+  <h2>노드생성과 추가</h2>
+  - DOM은 노드를 직접 생성/삽입/삭제/치환하는 메소드를 제공<br />
+  - 반드시 문서노드를 통해 호출<br />
+  <h3>createElement</h3>
+  - 요소노드 생성
+  <h3>createTextNode</h3>
+  - 텍스트 노드 생성
+  <h3>노드 추가</h3>
+  - append(노드, 문자열) : 자식노드 node 끝에 삽입
+  <br />
+  - prepend(노드, 문자열) : 자식노드 node 앞에 삽입
+  <br />
+  - before(노드, 문자열): 해당 노드 이전에 삽입
+  <br />
+  - after(노드, 문자열): 해당 노드 이후에 삽입
+  <br />
 
-    <h2>노드생성과 추가</h2>
-    - DOM은 노드를 직접 생성/삽입/삭제/치환하는 메소드를 제공<br>
-    - 반드시 문서노드를 통해 호출<br>
-    <h3>createElement</h3>
-    - 요소노드 생성
-    <h3>createTextNode</h3>
-    - 텍스트 노드 생성
-    <h3>노드 추가</h3>
-    - append(노드, 문자열) : 자식노드 node 끝에 삽입 <br>
-    - prepend(노드, 문자열) : 자식노드 node 앞에 삽입 <br>
-    - before(노드, 문자열): 해당 노드 이전에 삽입 <br>
-    - after(노드, 문자열): 해당 노드 이후에 삽입 <br>
-
-    <div>
-        <label>배려와 존중이 넘치는 한국스마트정보교육원</label>
-        <ul id="ksmartTeamUl">
-            <li>가이드: 이형열 교수님</li>
-            
-        </ul>
-    </div>
-    <script>
-
-    </script>
-
-    <h2>복수의 노드 생성과 추가</h2>
-    - DocumnetFragment : 노드 객체, 별도의 서브 DOM을 구성하여 
-                        기존DOM에 추가하는 목적으로 사용(컨테이너, 돔조각)<br>
-    - document.createDocumentFragment() : 메소드 호출로 생성<br>
-        
-    <div>
-        <label>배려와 존중이 넘치는 한국스마트정보교육원</label>
-        <ul id="ksTeam">
-            <!-- 팀명: xxx -->
-            <li>가이드: 이형열 교수님</li>
-            <!-- 각팀의 팀원을 추가하시오. -->
-        </ul>
-    </div>
-    <script>
-
-    </script>
-
-    <h2>노드 이동 및 특정 위치에 삽입</h2>
-    <h3>insertBefore(새로운노드, 위치)</h3>
-    <script>
-        
-    </script>
-
-    <h2>노드 교체 및 노드 삭제</h2>
-    <h3>replaceChild(새로운 노드, 노드 위치) - 교체</h3>
-    <h3>removeChild(노드 위치) - 삭제</h3>
-    <script>
-
-    </script>
-
-    <h2>노드복사</h2>
-    - cloneNode(deep 복사여부 [true || false])<br>
-    - false일 경우 자식노드까지는 복사되지 않음<br>
-    - true일 경우 자손노드 전체 복사<br>
-    - 요소에 등록되어 있는 이벤트는 복사되지 않음<br>
-
-    <ul class="ex-clone">
-        <li class="li-tag">텍스트노드</li>
+  <div>
+    <label>배려와 존중이 넘치는 한국스마트정보교육원</label>
+    <!-- before -->
+    <ul id="ksmartTeamUl">
+      <!-- <-- target -->
+      <!-- pretend(노드) -->
+      <li>가이드: 이형열 교수님</li>
+      <!-- append(노드) -->
     </ul>
+    <!-- after -->
+  </div>
+  <script>
+    const $ksmartTeamUl = document.getElementById("ksmartTeamUl");
+    const $newLiEle1 = document.createElement("li");
+    const $newTxtEle1 = document.createTextNode("팀원 : 1");
+    $newLiEle1.appendChild($newTxtEle1);
+    console.log($newLiEle1);
+    $ksmartTeamUl.append($newLiEle1);
 
-    <script>
-       
-    </script>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-</body>
+    const $newLiEle2 = document.createElement("li");
+    $newLiEle2.textContent = "팀원 : 2";
+    $ksmartTeamUl.appendChild($newLiEle2);
+
+    const $newLiEle3 = document.createElement("li");
+    $newLiEle3.textContent = "팀원 : 3";
+    $ksmartTeamUl.prepend($newLiEle3);
+
+    const $newLabel1 = document.createElement("label");
+    $newLabel1.textContent = "개발자 51기";
+    $ksmartTeamUl.before($newLabel1);
+
+    const $newDiv1 = document.createElement("div");
+    const $newLabel2 = document.createElement("label");
+    $newLabel2.textContent = "그럼 여기서 실습문제!!!";
+    const $newUl1 = document.createElement("ul");
+    $newUl1.id = "teamUl";
+    $newDiv1.append($newLabel2, $newUl1);
+    console.log($newDiv1);
+
+    $ksmartTeamUl.after($newDiv1);
+    // 팀원의 이름 li 태그 생성 후 화면에 출력하시오.
+
+    const teamArr = [
+      "고윤영",
+      "오민호",
+      "이희상",
+      "이동근",
+      "전우석",
+      "한동환",
+    ];
+
+    teamArr.forEach((name) => {
+      const $newLi = document.createElement("li");
+      $newLi.textContent = name;
+      $newUl1.append($newLi);
+    });
+  </script>
+
+  <h2>복수의 노드 생성과 추가</h2>
+  - DocumnetFragment : 노드 객체, 별도의 서브 DOM을 구성하여 기존DOM에 추가하는
+  목적으로 사용(컨테이너, 돔조각)<br />
+  - document.createDocumentFragment() : 메소드 호출로 생성<br />
+
+  <div>
+    <label>배려와 존중이 넘치는 한국스마트정보교육원</label>
+    <ul id="ksTeam">
+      <!-- 팀명: xxx -->
+      <li>가이드: 이형열 교수님</li>
+      <!-- 각팀의 팀원을 추가하시오. -->
+    </ul>
+  </div>
+  <script></script>
+
+  <h2>노드 이동 및 특정 위치에 삽입</h2>
+  <h3>insertBefore(새로운노드, 위치)</h3>
+  <script></script>
+
+  <h2>노드 교체 및 노드 삭제</h2>
+  <h3>replaceChild(새로운 노드, 노드 위치) - 교체</h3>
+  <h3>removeChild(노드 위치) - 삭제</h3>
+  <script></script>
+
+  <h2>노드복사</h2>
+  - cloneNode(deep 복사여부 [true || false])<br />
+  - false일 경우 자식노드까지는 복사되지 않음<br />
+  - true일 경우 자손노드 전체 복사<br />
+  - 요소에 등록되어 있는 이벤트는 복사되지 않음<br />
+
+  <ul class="ex-clone">
+    <li class="li-tag">텍스트노드</li>
+  </ul>
+
+  <script></script>
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
 </html>
