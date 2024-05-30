@@ -24,8 +24,17 @@
 	
 	<script type="text/javascript">
 		console.log('2 x 1 = 02\n2 x 2 = 04');
-		
-		
+
+		let initValue = 1; // 횟수 초기화
+		let timesPrint1 = '';
+		while (initValue < 10) {
+			const multiple = (2*initValue < 10) ? `0${2*initValue}` : 2*initValue;
+			timesPrint1 += `2 x ${initValue} = ${multiple}\n`;
+			//console.log(`2 x ${initValue} = ${multiple}`);
+			initValue += 1;
+		}
+		console.log(timesPrint1)
+
 	</script>
 	
 	<h2>실습2</h2>
@@ -42,7 +51,15 @@
 	2 x 1 = 02<br>
 	<hr>
 	<script type="text/javascript">
-		
+		initValue = 9;
+		let timesPrint2 = '';
+		while (initValue > 0) {
+			const multiple = (2*initValue < 10) ? `0${2*initValue}` : 2*initValue;
+			timesPrint2 += `2 x ${initValue} = ${multiple}\n`;
+			//console.log(`2 x ${initValue} = ${multiple}`);
+			initValue -= 1;
+		}
+		console.log(timesPrint2);
 	</script>
 	
 	<h1>for 실습</h1>
@@ -50,11 +67,26 @@
 	<h2>실습3</h2>
 	실습3. 1~100까지 반복되는 for문 작성 후 짝수와 짝수의 합을 출력하시오.
 	<hr>
-	짝수: 2, 4, 6, 8, ....<br>
+	짝수: 2, 4, 6, 8, ...., 100<br>
 	짝수들의 합: 2550
 	<hr>
 	<script type="text/javascript">
-		
+		let evenSum = 0;
+		let evenNum = '';
+		let isFirst = true;
+		for(let i=1; i < 101; i+=1){
+			if(i % 2 == 0){
+				evenSum += i;
+				if(isFirst){
+					evenNum += `${i}`;
+					isFirst = false;
+					continue;
+				}
+				evenNum += `, ${i}`;
+			}
+		}
+		const evenPrint = `짝수: ${evenNum}\n짝수들의 합: ${evenSum}`;
+		console.log(evenPrint);
 	</script>
 	
 	<h2>실습4</h2>
@@ -69,8 +101,24 @@
 	
 	<script type="text/javascript">
 		let exPrint = '*\n**\n***\n****\n*****\n';
-		console.log(print6);
+		console.log(exPrint);
+		let starPrint1 = '';
+		for(let i=0; i<5; i+=1){
+			for(let j=0; j<=i; j+=1){
+				starPrint1 += '*';
+			}
+			starPrint1 += '\n';
+		}
+		console.log(starPrint1);
 
+		let star = '';
+		let starPrint2 = '';
+
+		for (let index = 0; index < 5; index++) {
+			star += '*';
+			starPrint2 += `${star}\n`;
+		}
+		console.log(starPrint2);
 	</script>
 
 	<h2>실습5</h2>
@@ -164,9 +212,16 @@
 	9 x 8 = 72<br>
 	9 x 9 = 81<br>
 	<hr>
-
 	<script type="text/javascript">
-		
+		for(let times = 2;  times < 10; times += 1){
+			let timesPrint = `---${times}단---\n`;
+			for(let digit = 1; digit < 10; digit += 1){
+				let formatNum = (times*digit < 10) ? `0${times*digit}` : (times*digit);
+				timesPrint += `${times} X ${digit} = ${formatNum}\n`;
+			}
+			timesPrint += `-------------------\n`;
+			console.log(timesPrint);
+		}
 	</script>
 </body>
 </html>
